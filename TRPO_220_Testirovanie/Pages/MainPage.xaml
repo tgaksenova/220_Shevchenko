@@ -1,0 +1,34 @@
+﻿<Page x:Class="TRPO_220_Testirovanie.MainPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:TRPO_220_Testirovanie"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="MainPage"
+      Background="White">
+
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="250"/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+
+        <Grid Grid.Column="0">
+
+
+            
+            <StackPanel Grid.Row="1">
+                <TextBox  TextChanged="Search_TextChanged" x:Name="Search" VerticalContentAlignment="Center" Height="50" Margin="30,20,30,0"/>
+                <Button x:Name="Testbut" Height="50" Content="Тесты" Click="Tests_Click" Margin="30,20,30,0"/>
+                <Button x:Name="Questbut" Height="50" Content="Вопросы" Click="Questions_Click" Margin="30,20,30,0"/>
+                <Button x:Name="Studbut" Height="50" Content="Студенты" Click="Students_Click" Margin="30,20,30,0"/>
+                <Button x:Name="Addbut" Height="50" Content="Добавить студента" Click="Add_Click" Margin="30,70,30,0"/>
+            </StackPanel>
+        </Grid>
+        
+
+        <Frame x:Name="dbFrame" Grid.Column="1" Height="auto" NavigationUIVisibility="Hidden"/>
+    </Grid>
+</Page>

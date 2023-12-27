@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="056d505974a24b1bbb714c6f32b76ae0" Name="Diagram1">
+        <EntityTypeShape EntityType="TestirovanieModel.Group" Width="1.5" PointX="0.75" PointY="1.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="TestirovanieModel.QuestType" Width="1.5" PointX="0.75" PointY="5.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="TestirovanieModel.Role" Width="1.5" PointX="5.75" PointY="6.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="TestirovanieModel.StudenInformation" Width="1.5" PointX="3" PointY="1.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="TestirovanieModel.sysdiagrams" Width="1.5" PointX="7.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="TestirovanieModel.TestQInformation" Width="1.5" PointX="3" PointY="5.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="TestirovanieModel.TestReport" Width="1.5" PointX="5.25" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="TestirovanieModel.Users" Width="1.5" PointX="8" PointY="5.875" IsExpanded="true" />
+        <AssociationConnector Association="TestirovanieModel.FK_StudenInformation_Group" ManuallyRouted="false" />
+        <AssociationConnector Association="TestirovanieModel.FK_TestQInformation_QuestType" ManuallyRouted="false" />
+        <AssociationConnector Association="TestirovanieModel.FK_Users_Role" ManuallyRouted="false" />
+        <AssociationConnector Association="TestirovanieModel.FK_TestReport_StudenInformation" ManuallyRouted="false" />
+        <AssociationConnector Association="TestirovanieModel.FK_TestReport_TestQInformation" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

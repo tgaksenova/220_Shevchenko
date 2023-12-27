@@ -1,0 +1,170 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="Хранилище TestirovanieModel" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="Group">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="GroupNumber" Type="nvarchar" MaxLength="50" Nullable="false" />
+  </EntityType>
+  <EntityType Name="QuestType">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Type" Type="nvarchar" MaxLength="50" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Role">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" Nullable="false" />
+    <Property Name="RoleName" Type="nchar" MaxLength="10" Nullable="false" />
+  </EntityType>
+  <EntityType Name="StudenInformation">
+    <Key>
+      <PropertyRef Name="StudentID" />
+    </Key>
+    <Property Name="StudentID" Type="int" Nullable="false" />
+    <Property Name="GroupID" Type="int" Nullable="false" />
+    <Property Name="FirstName" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="SecondName" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="Patronymic" Type="nvarchar" MaxLength="50" Nullable="false" />
+  </EntityType>
+  <EntityType Name="sysdiagrams">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="principal_id" Type="int" Nullable="false" />
+    <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="version" Type="int" />
+    <Property Name="definition" Type="varbinary(max)" />
+  </EntityType>
+  <EntityType Name="TestQInformation">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="QuestTypeID" Type="int" Nullable="false" />
+    <Property Name="Question" Type="nvarchar" MaxLength="100" Nullable="false" />
+    <Property Name="Variant1" Type="nvarchar" MaxLength="100" />
+    <Property Name="Variant2" Type="nvarchar" MaxLength="100" />
+    <Property Name="Variant3" Type="nvarchar" MaxLength="100" />
+    <Property Name="Variant4" Type="nvarchar" MaxLength="100" />
+    <Property Name="CorrAnswer" Type="nvarchar" MaxLength="100" Nullable="false" />
+  </EntityType>
+  <EntityType Name="TestReport">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="TestDate" Type="date" Nullable="false" />
+    <Property Name="StudentID" Type="int" Nullable="false" />
+    <Property Name="QuestionID" Type="int" Nullable="false" />
+    <Property Name="Answer" Type="nvarchar" MaxLength="50" />
+    <Property Name="SpentTime" Type="int" Nullable="false" />
+    <Property Name="QuestionsAmount" Type="int" Nullable="false" />
+    <Property Name="CorrectAmount" Type="int" />
+    <Property Name="StudentMark" Type="int" />
+  </EntityType>
+  <EntityType Name="Users">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" Nullable="false" />
+    <Property Name="Login" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="Password" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="RoleID" Type="int" Nullable="false" />
+  </EntityType>
+  <Association Name="FK_StudenInformation_Group">
+    <End Role="Group" Type="Self.Group" Multiplicity="1" />
+    <End Role="StudenInformation" Type="Self.StudenInformation" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Group">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="StudenInformation">
+        <PropertyRef Name="GroupID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_TestQInformation_QuestType">
+    <End Role="QuestType" Type="Self.QuestType" Multiplicity="1" />
+    <End Role="TestQInformation" Type="Self.TestQInformation" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="QuestType">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="TestQInformation">
+        <PropertyRef Name="QuestTypeID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_TestReport_StudenInformation">
+    <End Role="StudenInformation" Type="Self.StudenInformation" Multiplicity="1" />
+    <End Role="TestReport" Type="Self.TestReport" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="StudenInformation">
+        <PropertyRef Name="StudentID" />
+      </Principal>
+      <Dependent Role="TestReport">
+        <PropertyRef Name="StudentID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_TestReport_TestQInformation">
+    <End Role="TestQInformation" Type="Self.TestQInformation" Multiplicity="1" />
+    <End Role="TestReport" Type="Self.TestReport" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TestQInformation">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="TestReport">
+        <PropertyRef Name="QuestionID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Users_Role">
+    <End Role="Role" Type="Self.Role" Multiplicity="1" />
+    <End Role="Users" Type="Self.Users" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Role">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Users">
+        <PropertyRef Name="RoleID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="Хранилище TestirovanieModelContainer">
+    <EntitySet Name="Group" EntityType="Self.Group" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="QuestType" EntityType="Self.QuestType" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Role" EntityType="Self.Role" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="StudenInformation" EntityType="Self.StudenInformation" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="TestQInformation" EntityType="Self.TestQInformation" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="TestReport" EntityType="Self.TestReport" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Users" EntityType="Self.Users" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK_StudenInformation_Group" Association="Self.FK_StudenInformation_Group">
+      <End Role="Group" EntitySet="Group" />
+      <End Role="StudenInformation" EntitySet="StudenInformation" />
+    </AssociationSet>
+    <AssociationSet Name="FK_TestQInformation_QuestType" Association="Self.FK_TestQInformation_QuestType">
+      <End Role="QuestType" EntitySet="QuestType" />
+      <End Role="TestQInformation" EntitySet="TestQInformation" />
+    </AssociationSet>
+    <AssociationSet Name="FK_TestReport_StudenInformation" Association="Self.FK_TestReport_StudenInformation">
+      <End Role="StudenInformation" EntitySet="StudenInformation" />
+      <End Role="TestReport" EntitySet="TestReport" />
+    </AssociationSet>
+    <AssociationSet Name="FK_TestReport_TestQInformation" Association="Self.FK_TestReport_TestQInformation">
+      <End Role="TestQInformation" EntitySet="TestQInformation" />
+      <End Role="TestReport" EntitySet="TestReport" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Users_Role" Association="Self.FK_Users_Role">
+      <End Role="Role" EntitySet="Role" />
+      <End Role="Users" EntitySet="Users" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>
